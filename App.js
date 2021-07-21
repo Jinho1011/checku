@@ -1,11 +1,14 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import Stack from './navigation/Stack';
 
 const App = () => {
   return (
-    <View>
-      <Text>Hello World</Text>
-    </View>
+    <NavigationContainer>
+      <Stack></Stack>
+    </NavigationContainer>
   );
 };
 
