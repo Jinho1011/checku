@@ -12,11 +12,10 @@ export default () => {
       }}>
       <Text
         style={{
-          fontFamily: 'NotoSansKR-Regular',
-          fontSize: 14,
+          fontSize: 28,
           letterSpacing: 0,
         }}>
-        안녕하세요
+        안녕하세요.. 😄
       </Text>
     </View>
   );
