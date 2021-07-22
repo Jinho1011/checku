@@ -16,13 +16,14 @@ export default ({navigation}) => {
   const [pwd, setPwd] = useState('');
 
   const onSubmit = async () => {
+    console.log('submitted');
     let res = JSON.parse(await login(id, pwd));
     console.log(res);
 
     if (res.JSESSIONID) {
       await Keychain.setGenericPassword(id, pwd);
       console.log('login success');
-      navigation.navigate('설정');
+      navigation.navigate('tab');
     } else {
       alertLogin(res);
     }

@@ -1,0 +1,16 @@
+import * as React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+import GradeContainer from '../screens/Grade/GradeContainer';
+import GraduateContainer from '../screens/Graduate/GraduateContainer';
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="grade" component={GradeContainer} />
+      <Tab.Screen name="graduate" component={GraduateContainer} />
+    </Tab.Navigator>
+  );
+}
