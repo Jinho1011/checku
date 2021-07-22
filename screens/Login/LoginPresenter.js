@@ -12,6 +12,7 @@ export default () => {
       }}>
       <Text
         style={{
+          fontFamily: 'NotoSansKR-Thin',
           fontSize: 28,
           letterSpacing: 0,
         }}>
