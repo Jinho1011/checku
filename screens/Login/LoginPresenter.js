@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-// import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export default () => {
   return (
