@@ -16,7 +16,7 @@ export default () => {
           fontSize: 28,
           letterSpacing: 0,
         }}>
-        Login Screen
+        Setting Screen
       </Text>
     </View>
   );
