@@ -53,7 +53,7 @@ const LoginButtonText = styled.Text`
   color: #ffffff;
 `;
 
-export default ({setId, setPwd, setSubmit}) => {
+export default ({setId, setPwd, onSubmit}) => {
   return (
     <Container>
       <Title>로그인</Title>
@@ -64,7 +64,7 @@ export default ({setId, setPwd, setSubmit}) => {
         <InputTitle>비밀번호</InputTitle>
         <InputText secureTextEntry={true} onChangeText={setPwd} />
         <LoginButton
-          onPress={() => setSubmit(true)}
+          onPress={onSubmit}
           style={{
             ...Platform.select({
               ios: {

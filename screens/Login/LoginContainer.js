@@ -1,25 +1,37 @@
 import React, {useState, useEffect} from 'react';
-import LoginPresenter from './LoginPresenter';
-import {_login} from '../../api';
+import {Alert} from 'react-native';
+import * as Keychain from 'react-native-keychain';
 
-export default () => {
+import LoginPresenter from './LoginPresenter';
+import {login} from '../../api';
+
+const alertLogin = res => {
+  Alert.alert('로그인에 실패하였습니다.', res.ERRMSGINFO.ERRMSG, [
+    {text: 'OK'},
+  ]);
+};
+
+export default ({navigation}) => {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
-  const [submit, setSubmit] = useState(false);
 
-  useEffect(async () => {
-    if (submit) {
-      let res = await _login(id, pwd);
-      console.log(res);
-      console.log(res.text());
-      console.log(res.text);
+  const onSubmit = async () => {
+    let res = JSON.parse(await login(id, pwd));
+    console.log(res);
+
+    if (res.JSESSIONID) {
+      await Keychain.setGenericPassword(id, pwd);
+      console.log('login success');
+      navigation.navigate('설정');
+    } else {
+      alertLogin(res);
     }
-  }, [submit]);
+  };
 
   return (
     <LoginPresenter
       setId={setId}
       setPwd={setPwd}
-      setSubmit={setSubmit}></LoginPresenter>
+      onSubmit={onSubmit}></LoginPresenter>
   );
 };
