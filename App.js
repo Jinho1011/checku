@@ -1,17 +1,27 @@
 import 'react-native-gesture-handler';
-import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import * as Keychain from 'react-native-keychain';
+import {login} from './api';
 import {NavigationContainer} from '@react-navigation/native';
-import {LogBox} from 'react-native';
 import Stack from './navigation/Stack';
 
 const App = () => {
-  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-  LogBox.ignoreAllLogs(); //Ignore all log notifications
+  const [initRoute, setInitRoute] = useState('undefined');
+
+  useEffect(async () => {
+    const credentials = await Keychain.getGenericPassword();
+
+    if (credentials) {
+      await login(credentials.username, credentials.password);
+      setInitRoute('tab');
+    } else {
+      setInitRoute('login');
+    }
+  }, []);
 
   return (
     <NavigationContainer>
-      <Stack></Stack>
+      <Stack initRoute={initRoute}></Stack>
     </NavigationContainer>
   );
 };
