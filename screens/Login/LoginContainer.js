@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Alert} from 'react-native';
 import * as Keychain from 'react-native-keychain';
 
@@ -16,9 +16,7 @@ export default ({navigation}) => {
   const [pwd, setPwd] = useState('');
 
   const onSubmit = async () => {
-    console.log('submitted');
     let res = JSON.parse(await login(id, pwd));
-    console.log(res);
 
     if (res.JSESSIONID) {
       await Keychain.setGenericPassword(id, pwd);
