@@ -3,7 +3,8 @@ import {Alert} from 'react-native';
 import * as Keychain from 'react-native-keychain';
 
 import LoginPresenter from './LoginPresenter';
-import {login} from '../../api';
+import {login, onload} from '../../api';
+import {storeData} from '../../storage';
 
 const alertLogin = res => {
   Alert.alert('로그인에 실패하였습니다.', res.ERRMSGINFO.ERRMSG, [
@@ -20,7 +21,12 @@ export default ({navigation}) => {
 
     if (res.JSESSIONID) {
       await Keychain.setGenericPassword(id, pwd);
-      console.log('login success');
+      let stdNo = JSON.parse(await onload()).dsPriv[0].STD_NO;
+      console.log(
+        '🚀 ~ file: LoginContainer.js ~ line 25 ~ onSubmit ~ stdNo',
+        stdNo,
+      );
+      storeData('@stdNo', {stdNo});
       navigation.navigate('tab');
     } else {
       alertLogin(res);
