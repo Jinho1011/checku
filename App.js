@@ -12,7 +12,7 @@ const App = () => {
     const credentials = await Keychain.getGenericPassword();
 
     if (credentials) {
-      await login(credentials.username, credentials.password);
+      let res = await login(credentials.username, credentials.password);
       setInitRoute('tab');
     } else {
       setInitRoute('login');
