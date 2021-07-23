@@ -18,7 +18,7 @@ export const onload = () => {
     headers: {'Content-Type': 'application/json'},
   })
     .then(response => {
-      return response;
+      return response.text();
     })
     .catch(error => {
       throw error;
