@@ -1,8 +1,15 @@
 import React from 'react';
-import {Text, View, StyleSheet, Platform} from 'react-native';
-import styled, {css} from 'styled-components/native';
+import {Platform} from 'react-native';
+import styled from 'styled-components/native';
 
-import {Container, Title} from '../components';
+import {Container} from '../components';
+
+const Title = styled.Text`
+  font-family: 'NotoSansKR-Bold';
+  font-size: 26px;
+  line-height: 38px;
+  color: #333333;
+`;
 
 const SubTitle = styled.Text`
   font-family: 'NotoSansKR-Regular';
