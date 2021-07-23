@@ -24,3 +24,17 @@ export const onload = () => {
       throw error;
     });
 };
+
+export const gradeAll = stdNo => {
+  return fetch('http://3.38.19.120/grade/all', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({strStdNo: stdNo}),
+  })
+    .then(response => {
+      return response.text();
+    })
+    .catch(error => {
+      throw error;
+    });
+};
