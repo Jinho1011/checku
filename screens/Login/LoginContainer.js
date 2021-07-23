@@ -22,7 +22,7 @@ export default ({navigation}) => {
     if (res.JSESSIONID) {
       await Keychain.setGenericPassword(id, pwd);
       let stdNo = JSON.parse(await onload()).dsPriv[0].STD_NO;
-      storeData('@stdNo', {stdNo});
+      await storeData('@stdNo', {stdNo});
       navigation.navigate('tab');
     } else {
       alertLogin(res);
