@@ -22,10 +22,6 @@ export default ({navigation}) => {
     if (res.JSESSIONID) {
       await Keychain.setGenericPassword(id, pwd);
       let stdNo = JSON.parse(await onload()).dsPriv[0].STD_NO;
-      console.log(
-        '🚀 ~ file: LoginContainer.js ~ line 25 ~ onSubmit ~ stdNo',
-        stdNo,
-      );
       storeData('@stdNo', {stdNo});
       navigation.navigate('tab');
     } else {

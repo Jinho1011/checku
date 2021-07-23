@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import LoginContainer from '../screens/Login/LoginContainer';
@@ -9,8 +9,6 @@ import Tab from './Tab';
 const Stack = createStackNavigator();
 
 export default ({initRoute}) => {
-  console.log('🚀 ~ file: Stack.js ~ line 11 ~ initRoute', initRoute);
-
   if (initRoute == 'undefined') {
     return <View style={{flex: 1, backgroundColor: '#fff'}}></View>;
   } else {
