@@ -12,9 +12,8 @@ export default () => {
     const gradeObj = {};
 
     GRADES.map(GRADE => {
-      // if 과목
       if (GRADE.HAKSU_ID != null) {
-        let prev = gradeObj[GRADE.YY]?.[GRADE.SHTM];
+        let prev = gradeObj[GRADE.YY]?.[GRADE.SHTM]?.COURSES;
         let gradeArr = [];
 
         if (prev != null) {
@@ -23,16 +22,26 @@ export default () => {
 
         gradeObj[GRADE.YY] = {
           ...gradeObj[GRADE.YY],
-          [GRADE.SHTM]: gradeArr,
+          [GRADE.SHTM]: {
+            COURSES: gradeArr,
+          },
         };
-      }
-      // else if 학기 평균
-      else if (GRADE.SHTM != null) {
-        // console.log('나는 학기 평균');
-      }
-      // else if 전체 평균
-      else {
-        // console.log('나는 전체 평균');
+      } else if (GRADE.SHTM != null) {
+        gradeObj[GRADE.YY] = {
+          ...gradeObj[GRADE.YY],
+          [GRADE.SHTM]: {
+            ...gradeObj[GRADE.YY][GRADE.SHTM],
+            AVG: GRADE,
+          },
+        };
+      } else {
+        gradeObj[GRADE.YY] = {
+          ...gradeObj[GRADE.YY],
+          [GRADE.SHTM]: {
+            ...gradeObj[GRADE.YY][GRADE.SHTM],
+            AVG: GRADE,
+          },
+        };
       }
     });
     setGrades(gradeObj);
@@ -41,12 +50,16 @@ export default () => {
 
   useEffect(() => {
     const init = async () => {
-      let {stdNo} = await getData('@stdNo');
-      let GRADES = JSON.parse(await gradeAll(stdNo));
-      let storedGrades = await getData('@grades');
+      try {
+        let {stdNo} = await getData('@stdNo');
+        // let GRADES = JSON.parse(await gradeAll(stdNo));
+        let storedGrades = await getData('@grades');
 
-      if (storedGrades != null) setGrades(storedGrades);
-      initGrades(GRADES);
+        if (storedGrades != null) setGrades(storedGrades);
+        // initGrades(GRADES);
+      } catch (error) {
+        throw error;
+      }
     };
     init();
   }, []);
