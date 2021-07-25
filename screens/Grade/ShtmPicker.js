@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   style: {
@@ -59,7 +59,7 @@ export default ({grades}) => {
       disableBorderRadius={false}
       showTickIcon={false}
       ArrowUpIconComponent={({style}) => (
-        <Icon name="rocket" size={30} color="#900" />
+        <Icon name="home" size={24} color="#ffffff" />r
       )}
     />
   );
