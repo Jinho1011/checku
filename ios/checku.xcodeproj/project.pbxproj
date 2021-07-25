@@ -13,13 +13,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		18A5FD3A8762AE52FD405FBE /* libPods-checku-checkuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAD5F3069C84CBB70FF07BD /* libPods-checku-checkuTests.a */; };
 		1B63C9273EDB88FA07E36750 /* libPods-checku.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F109D937D8BFE39054772D3 /* libPods-checku.a */; };
-		268DBCCC98964FEEA6042C87 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8EF4BB98717456A86F9C3C6 /* NotoSansKR-Medium.otf */; };
-		781A8E1E7DA84C859679C32E /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 71870C631A1C442DB94EE29E /* NotoSansKR-Thin.otf */; };
+		40A5D9ADD9C2471E957413ED /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65EFF83F5F144C19B1232796 /* NotoSansKR-Light.otf */; };
+		4680DCCC5D5246B4A0DB680B /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65BBEAE75D8846B585BD79FD /* NotoSansKR-Medium.otf */; };
+		78B7B1A29B634A4DA859A2A4 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E60104098CE84EC3AF290A3F /* NotoSansKR-Regular.otf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A2BF6ADF589746C68EFDB5EA /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DA3C97841D1F424C86D98B0C /* NotoSansKR-Light.otf */; };
-		A9FD46E15B2B4116A047A54C /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88DEDB6219AE4962B5C672AD /* NotoSansKR-Black.otf */; };
-		B43298FB653044889BD5C93A /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20E41B7076FD41A09A874C7F /* NotoSansKR-Bold.otf */; };
-		F1DCDB3B8BFA431588B1513F /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 319C2066F38B41A8802B4049 /* NotoSansKR-Regular.otf */; };
+		86DEF9449D044843A40E3FBE /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4920E1BBC7DD4188A47B9A62 /* NotoSansKR-Thin.otf */; };
+		8FDCD80FF5944FA6A985F039 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F682B2E711442D5874D1D3B /* NotoSansKR-Bold.otf */; };
+		ECCB6BC9C1654DC1A6546212 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 48750330F48D414B97998E12 /* NotoSansKR-Black.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,35 +42,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = checku/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = checku/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = checku/main.m; sourceTree = "<group>"; };
-		20E41B7076FD41A09A874C7F /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Bold.otf"; path = "../assets/fonts/NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
-		319C2066F38B41A8802B4049 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Regular.otf"; path = "../assets/fonts/NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
-		34F442F626AD47AB00B3691E /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Foundation.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		34F442F726AD47AB00B3691E /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		34F442F826AD47AC00B3691E /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		34F442F926AD47AC00B3691E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SimpleLineIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		34F442FA26AD47AC00B3691E /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		34F442FB26AD47AC00B3691E /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Zocial.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		34F442FC26AD47AC00B3691E /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fontisto.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		34F442FD26AD47AC00B3691E /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		34F442FE26AD47AC00B3691E /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		34F442FF26AD47AC00B3691E /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		34F4430026AD47AC00B3691E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		34F4430126AD47AC00B3691E /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		34F4430226AD47AC00B3691E /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		34F4430326AD47AC00B3691E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		34F4430426AD47AC00B3691E /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		34F4430526AD47AC00B3691E /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		3BAD5F3069C84CBB70FF07BD /* libPods-checku-checkuTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-checku-checkuTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48750330F48D414B97998E12 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Black.otf"; path = "../assets/fonts/NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		4920E1BBC7DD4188A47B9A62 /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Thin.otf"; path = "../assets/fonts/NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		5F109D937D8BFE39054772D3 /* libPods-checku.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-checku.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		71870C631A1C442DB94EE29E /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Thin.otf"; path = "../assets/fonts/NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		65BBEAE75D8846B585BD79FD /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Medium.otf"; path = "../assets/fonts/NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		65EFF83F5F144C19B1232796 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Light.otf"; path = "../assets/fonts/NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		6F682B2E711442D5874D1D3B /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Bold.otf"; path = "../assets/fonts/NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = checku/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		887F28C32B864304974BBE56 /* Pods-checku-checkuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-checku-checkuTests.release.xcconfig"; path = "Target Support Files/Pods-checku-checkuTests/Pods-checku-checkuTests.release.xcconfig"; sourceTree = "<group>"; };
-		88DEDB6219AE4962B5C672AD /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Black.otf"; path = "../assets/fonts/NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		A599E43519B0FD1B1C19E811 /* Pods-checku-checkuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-checku-checkuTests.debug.xcconfig"; path = "Target Support Files/Pods-checku-checkuTests/Pods-checku-checkuTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B4EBCB9224ECE928D4FC017C /* Pods-checku.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-checku.debug.xcconfig"; path = "Target Support Files/Pods-checku/Pods-checku.debug.xcconfig"; sourceTree = "<group>"; };
 		D373A9701351DFC8C44F04BD /* Pods-checku.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-checku.release.xcconfig"; path = "Target Support Files/Pods-checku/Pods-checku.release.xcconfig"; sourceTree = "<group>"; };
-		DA3C97841D1F424C86D98B0C /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Light.otf"; path = "../assets/fonts/NotoSansKR-Light.otf"; sourceTree = "<group>"; };
-		E8EF4BB98717456A86F9C3C6 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Medium.otf"; path = "../assets/fonts/NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		E60104098CE84EC3AF290A3F /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansKR-Regular.otf"; path = "../assets/fonts/NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -134,29 +118,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		34F442F526AD476F00B3691E /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				34F442FE26AD47AC00B3691E /* AntDesign.ttf */,
-				34F4430426AD47AC00B3691E /* Entypo.ttf */,
-				34F442FD26AD47AC00B3691E /* EvilIcons.ttf */,
-				34F442FA26AD47AC00B3691E /* Feather.ttf */,
-				34F442F726AD47AB00B3691E /* FontAwesome.ttf */,
-				34F4430026AD47AC00B3691E /* FontAwesome5_Brands.ttf */,
-				34F4430126AD47AC00B3691E /* FontAwesome5_Regular.ttf */,
-				34F4430326AD47AC00B3691E /* FontAwesome5_Solid.ttf */,
-				34F442FC26AD47AC00B3691E /* Fontisto.ttf */,
-				34F442F626AD47AB00B3691E /* Foundation.ttf */,
-				34F4430226AD47AC00B3691E /* Ionicons.ttf */,
-				34F442FF26AD47AC00B3691E /* MaterialCommunityIcons.ttf */,
-				34F442F826AD47AC00B3691E /* MaterialIcons.ttf */,
-				34F4430526AD47AC00B3691E /* Octicons.ttf */,
-				34F442F926AD47AC00B3691E /* SimpleLineIcons.ttf */,
-				34F442FB26AD47AC00B3691E /* Zocial.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		4E9F2B404C03E5471FDCF36C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,14 +139,13 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				34F442F526AD476F00B3691E /* Fonts */,
 				13B07FAE1A68108700A75B9A /* checku */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* checkuTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				4E9F2B404C03E5471FDCF36C /* Pods */,
-				D891B8FB56B44E459B6FE4C8 /* Resources */,
+				BC3911F5E47E49CD94344481 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -201,15 +161,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D891B8FB56B44E459B6FE4C8 /* Resources */ = {
+		BC3911F5E47E49CD94344481 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				88DEDB6219AE4962B5C672AD /* NotoSansKR-Black.otf */,
-				20E41B7076FD41A09A874C7F /* NotoSansKR-Bold.otf */,
-				DA3C97841D1F424C86D98B0C /* NotoSansKR-Light.otf */,
-				E8EF4BB98717456A86F9C3C6 /* NotoSansKR-Medium.otf */,
-				319C2066F38B41A8802B4049 /* NotoSansKR-Regular.otf */,
-				71870C631A1C442DB94EE29E /* NotoSansKR-Thin.otf */,
+				48750330F48D414B97998E12 /* NotoSansKR-Black.otf */,
+				6F682B2E711442D5874D1D3B /* NotoSansKR-Bold.otf */,
+				65EFF83F5F144C19B1232796 /* NotoSansKR-Light.otf */,
+				65BBEAE75D8846B585BD79FD /* NotoSansKR-Medium.otf */,
+				E60104098CE84EC3AF290A3F /* NotoSansKR-Regular.otf */,
+				4920E1BBC7DD4188A47B9A62 /* NotoSansKR-Thin.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -225,7 +185,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				D84078EF87D16BD798995FFC /* [CP] Embed Pods Frameworks */,
 				091673B7630F59BCC8E02CD6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -248,7 +207,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				9BF2E95A29908DBFD672B163 /* [CP] Embed Pods Frameworks */,
 				761F51B7632E20490C5AB40E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -310,12 +268,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A9FD46E15B2B4116A047A54C /* NotoSansKR-Black.otf in Resources */,
-				B43298FB653044889BD5C93A /* NotoSansKR-Bold.otf in Resources */,
-				A2BF6ADF589746C68EFDB5EA /* NotoSansKR-Light.otf in Resources */,
-				268DBCCC98964FEEA6042C87 /* NotoSansKR-Medium.otf in Resources */,
-				F1DCDB3B8BFA431588B1513F /* NotoSansKR-Regular.otf in Resources */,
-				781A8E1E7DA84C859679C32E /* NotoSansKR-Thin.otf in Resources */,
+				ECCB6BC9C1654DC1A6546212 /* NotoSansKR-Black.otf in Resources */,
+				8FDCD80FF5944FA6A985F039 /* NotoSansKR-Bold.otf in Resources */,
+				40A5D9ADD9C2471E957413ED /* NotoSansKR-Light.otf in Resources */,
+				4680DCCC5D5246B4A0DB680B /* NotoSansKR-Medium.otf in Resources */,
+				78B7B1A29B634A4DA859A2A4 /* NotoSansKR-Regular.otf in Resources */,
+				86DEF9449D044843A40E3FBE /* NotoSansKR-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,40 +370,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-checku/Pods-checku-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9BF2E95A29908DBFD672B163 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-checku/Pods-checku-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-checku/Pods-checku-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-checku/Pods-checku-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D84078EF87D16BD798995FFC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-checku-checkuTests/Pods-checku-checkuTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-checku-checkuTests/Pods-checku-checkuTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-checku-checkuTests/Pods-checku-checkuTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
