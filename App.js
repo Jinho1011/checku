@@ -9,13 +9,13 @@ const App = () => {
   const [initRoute, setInitRoute] = useState('undefined');
 
   useEffect(async () => {
-    // const credentials = await Keychain.getGenericPassword();
-    // if (credentials) {
-    //   let res = await login(credentials.username, credentials.password);
-    //   setInitRoute('tab');
-    // } else {
-    //   setInitRoute('login');
-    // }
+    const credentials = await Keychain.getGenericPassword();
+    if (credentials) {
+      let res = await login(credentials.username, credentials.password);
+      setInitRoute('tab');
+    } else {
+      setInitRoute('login');
+    }
     // await Keychain.resetGenericPassword();
     setInitRoute('tab');
   }, []);
