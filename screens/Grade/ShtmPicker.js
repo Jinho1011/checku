@@ -1,43 +1,78 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-const styles = StyleSheet.create({
-  style: {
-    borderWidth: 0,
-    backgroundColor: '#00CA64',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-
-    elevation: 4,
-  },
-  dropDownContainerStyle: {
-    borderWidth: 0,
-    backgroundColor: '#fff',
-    marginTop: 4,
-  },
-});
+import Icon from 'react-native-vector-icons/Entypo';
 
 export default ({grades}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholder, setPlaceholder] = useState('2021년 1학기');
+  const [margin, setMargin] = useState(0);
   const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
+    {
+      label: '2021년 1학기',
+      value: {
+        year: 2021,
+        shtm: 'B01011',
+      },
+    },
   ]);
+
+  const styles = StyleSheet.create({
+    style: {
+      borderWidth: 0,
+      backgroundColor: '#00CA64',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.23,
+      shadowRadius: 2.62,
+
+      elevation: 4,
+    },
+    containerStyle: {
+      marginBottom: margin,
+    },
+    dropDownContainerStyle: {
+      borderWidth: 0,
+      backgroundColor: '#fff',
+      marginTop: 4,
+    },
+    textStyle: {
+      color: '#fff',
+      fontFamily: 'NotoSansKR-Medium',
+    },
+    listItemLabelStyle: {
+      color: '#000',
+      fontFamily: 'NotoSansKR-Medium',
+    },
+  });
+
+  useEffect(() => {
+    if (open) {
+      const itemCnt = items.length;
+      setMargin(itemCnt * 36 + 6);
+    } else {
+      setMargin(0);
+    }
+  }, [open]);
 
   useEffect(() => {
     // if object is not empty
     if (Object.keys(grades).length != 0) {
       for (const year in grades) {
-        console.log(year);
+        if (year != '0000') {
+          for (const shtm in grades[year]) {
+            let SHTM_KR;
+            if (shtm == 'B01011') SHTM_KR = '1학기';
+            else if (shtm == 'B01012') SHTM_KR = '2학기';
+
+            // console.log(year + '년 ' + SHTM_KR);
+            // console.log(grades[year][shtm]['COURSES']);
+          }
+        }
       }
     }
   });
@@ -53,13 +88,17 @@ export default ({grades}) => {
       placeholder={placeholder}
       listMode="SCROLLVIEW"
       style={styles.style}
+      containerStyle={styles.containerStyle}
       dropDownContainerStyle={styles.dropDownContainerStyle}
-      textStyle={{color: '#fff'}}
-      listItemLabelStyle={{color: '#000'}}
+      textStyle={styles.textStyle}
+      listItemLabelStyle={styles.listItemLabelStyle}
       disableBorderRadius={false}
       showTickIcon={false}
-      ArrowUpIconComponent={({style}) => (
-        <Icon name="home" size={24} color="#ffffff" />r
+      ArrowUpIconComponent={() => (
+        <Icon name="chevron-up" size={24} color="#ffffff" />
+      )}
+      ArrowDownIconComponent={() => (
+        <Icon name="chevron-down" size={24} color="#ffffff" />
       )}
     />
   );

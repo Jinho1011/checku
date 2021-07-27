@@ -1,5 +1,7 @@
-import {Platform} from 'react-native';
+import {Platform, Dimensions} from 'react-native';
 import styled, {css} from 'styled-components/native';
+
+let deviceWidth = Dimensions.get('window').width;
 
 export const Container = styled.ScrollView`
   ${Platform.select({
@@ -13,4 +15,11 @@ export const Container = styled.ScrollView`
   padding-left: 16px;
   padding-right: 16px;
   background-color: #fff;
+`;
+
+export const Divider = styled.View`
+  margin-left: -16px;
+  width: ${deviceWidth}px;
+  height: 16px;
+  background-color: #f1f6f4;
 `;
