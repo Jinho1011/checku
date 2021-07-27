@@ -35,12 +35,10 @@ export default () => {
           },
         };
       } else {
-        gradeObj[GRADE.YY] = {
-          ...gradeObj[GRADE.YY],
-          GRADE,
-        };
+        gradeObj['AVG'] = GRADE;
       }
     });
+
     setGrades(gradeObj);
     storeData('@grades', gradeObj);
   };

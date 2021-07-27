@@ -3,20 +3,12 @@ import {StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Entypo';
 
-export default ({grades}) => {
+export default ({grades, setSelected}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [placeholder, setPlaceholder] = useState('2021년 1학기');
   const [margin, setMargin] = useState(0);
-  const [items, setItems] = useState([
-    {
-      label: '2021년 1학기',
-      value: {
-        year: 2021,
-        shtm: 'B01011',
-      },
-    },
-  ]);
+  const [items, setItems] = useState([]);
 
   const styles = StyleSheet.create({
     style: {
@@ -51,6 +43,14 @@ export default ({grades}) => {
   });
 
   useEffect(() => {
+    if (value != null) {
+      items.map(item => {
+        if (value == item.label) setSelected(item.data);
+      });
+    }
+  }, [value]);
+
+  useEffect(() => {
     if (open) {
       const itemCnt = items.length;
       setMargin(itemCnt * 36 + 6);
@@ -60,17 +60,26 @@ export default ({grades}) => {
   }, [open]);
 
   useEffect(() => {
-    // if object is not empty
-    if (Object.keys(grades).length != 0) {
+    if (Object.keys(grades).length != 0 && items.length == 0) {
       for (const year in grades) {
-        if (year != '0000') {
+        if (year != 'AVG') {
           for (const shtm in grades[year]) {
             let SHTM_KR;
             if (shtm == 'B01011') SHTM_KR = '1학기';
             else if (shtm == 'B01012') SHTM_KR = '2학기';
+            const label = year + '년 ' + SHTM_KR;
 
-            // console.log(year + '년 ' + SHTM_KR);
-            // console.log(grades[year][shtm]['COURSES']);
+            setItems(prev => [
+              {
+                label: label,
+                value: label,
+                data: {
+                  year: year,
+                  shtm: shtm,
+                },
+              },
+              ...prev,
+            ]);
           }
         }
       }

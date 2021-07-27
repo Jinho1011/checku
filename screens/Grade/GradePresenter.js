@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
@@ -119,6 +119,19 @@ const AvgNumber = styled.Text`
 
 export default ({grades}) => {
   // console.log(grades['2020']?.['B01012']);
+  const [selected, setSelected] = useState({
+    year: '2021',
+    shtm: 'B01011',
+  });
+  const [courses, setCourses] = useState([]);
+  const [avg, setAvg] = useState({});
+
+  useEffect(() => {
+    if (Object.keys(grades).length != 0) {
+      setCourses(grades[selected.year][selected.shtm].COURSES);
+      setAvg(grades[selected.year][selected.shtm].AVG);
+    }
+  });
 
   return (
     <Container nestedScrollEnabled={true}>
@@ -128,50 +141,32 @@ export default ({grades}) => {
           <SettingText>설정</SettingText>
         </SettingBtn>
       </TitleContainer>
-      <ShtmPicker grades={grades}></ShtmPicker>
+      <ShtmPicker grades={grades} setSelected={setSelected}></ShtmPicker>
       <CourseContainer>
         <CoursesTitleContainer>
           <GradesTitle>과목명</GradesTitle>
           <GradesTitle2>등급</GradesTitle2>
         </CoursesTitleContainer>
         <Courses>
-          <Course>
-            <CourseTitle>웹프로그래밍</CourseTitle>
-            <CourseGradeContainer>
-              <CourseGrade>A+</CourseGrade>
-            </CourseGradeContainer>
-          </Course>
-          <Course>
-            <CourseTitle>확률과통계</CourseTitle>
-            <CourseGradeContainer>
-              <CourseGrade>A</CourseGrade>
-            </CourseGradeContainer>
-          </Course>
-          <Course>
-            <CourseTitle>자료구조</CourseTitle>
-            <CourseGradeContainer>
-              <CourseGrade>A+</CourseGrade>
-            </CourseGradeContainer>
-          </Course>
-          <Course>
-            <CourseTitle>객체지향프로그래밍</CourseTitle>
-            <CourseGradeContainer>
-              <CourseGrade>A+</CourseGrade>
-            </CourseGradeContainer>
-          </Course>
+          {courses.map(course => {
+            return (
+              <Course key={course.HAKSU_ID}>
+                <CourseTitle>{course.HAKSU_NM}</CourseTitle>
+                <CourseGradeContainer>
+                  <CourseGrade>{course.GRD}</CourseGrade>
+                </CourseGradeContainer>
+              </Course>
+            );
+          })}
         </Courses>
         <AvgContainer>
           <Avg>
             <AvgTitle>신청학점</AvgTitle>
-            <AvgNumber>18</AvgNumber>
+            <AvgNumber>{avg.DETM_CD}</AvgNumber>
           </Avg>
           <Avg>
             <AvgTitle>평점평균</AvgTitle>
-            <AvgNumber>4.50</AvgNumber>
-          </Avg>
-          <Avg>
-            <AvgTitle>석차</AvgTitle>
-            <AvgNumber>1/185</AvgNumber>
+            <AvgNumber>{avg.POBT_DIV}</AvgNumber>
           </Avg>
         </AvgContainer>
       </CourseContainer>
