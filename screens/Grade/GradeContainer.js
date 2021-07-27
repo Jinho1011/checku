@@ -37,10 +37,7 @@ export default () => {
       } else {
         gradeObj[GRADE.YY] = {
           ...gradeObj[GRADE.YY],
-          [GRADE.SHTM]: {
-            ...gradeObj[GRADE.YY][GRADE.SHTM],
-            AVG: GRADE,
-          },
+          GRADE,
         };
       }
     });
@@ -51,12 +48,12 @@ export default () => {
   useEffect(() => {
     const init = async () => {
       try {
-        let {stdNo} = await getData('@stdNo');
-        // let GRADES = JSON.parse(await gradeAll(stdNo));
+        let stdNo = await getData('@stdNo');
+        let GRADES = JSON.parse(await gradeAll(stdNo));
         let storedGrades = await getData('@grades');
 
         if (storedGrades != null) setGrades(storedGrades);
-        // initGrades(GRADES);
+        initGrades(GRADES);
       } catch (error) {
         throw error;
       }
