@@ -10,6 +10,7 @@ const App = () => {
 
   useEffect(async () => {
     const credentials = await Keychain.getGenericPassword();
+
     if (credentials) {
       let res = await login(credentials.username, credentials.password);
       setInitRoute('tab');
