@@ -7,7 +7,7 @@ import {login, onload} from '../../api';
 import {storeData} from '../../storage';
 
 const alertLogin = res => {
-  Alert.alert('로그인에 실패하였습니다.', res.ERRMSGINFO.ERRMSG, [
+  Alert.alert('로그인에 실패하였습니다.', res.ERRMSGINFO.ERRCODE, [
     {text: 'OK'},
   ]);
 };
@@ -17,7 +17,12 @@ export default ({navigation}) => {
   const [pwd, setPwd] = useState('');
 
   const onSubmit = async () => {
-    let res = JSON.parse(await login(id, pwd));
+    let res = await login(id, pwd);
+    try {
+      res = JSON.parse(res);
+    } catch (e) {
+      console.error(e);
+    }
 
     if (res.JSESSIONID) {
       await Keychain.setGenericPassword(id, pwd);
