@@ -38,7 +38,6 @@ export default () => {
         gradeObj['AVG'] = GRADE;
       }
     });
-
     setGrades(gradeObj);
     storeData('@grades', gradeObj);
   };
@@ -47,7 +46,8 @@ export default () => {
     const init = async () => {
       try {
         let stdNo = await getData('@stdNo');
-        let GRADES = JSON.parse(await gradeAll(stdNo));
+        let GRADES = await gradeAll(stdNo);
+        GRADES = JSON.parse(GRADES);
         let storedGrades = await getData('@grades');
 
         if (storedGrades != null) setGrades(storedGrades);

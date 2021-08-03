@@ -118,7 +118,6 @@ const AvgNumber = styled.Text`
 `;
 
 export default ({grades}) => {
-  // console.log(grades['2020']?.['B01012']);
   const [selected, setSelected] = useState({
     year: '2021',
     shtm: 'B01011',
