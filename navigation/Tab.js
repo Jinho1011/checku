@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import GradeContainer from '../screens/Grade/GradeContainer';
 import GraduateContainer from '../screens/Graduate/GraduateContainer';
 import CourseContainer from '../screens/Course/CourseContainer';
+import {IconContainer, IconText} from './TabIcon';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,49 +20,33 @@ export default function App() {
           let iconColor = focused ? '#00CA64' : '#F1F6F4';
           let iconSize = 24;
 
-          const Icon = () => {
-            if (route.name === 'grade') {
-              iconName = 'alphabetical-variant'; // MaterialCommunityIcons
-              tabName = '성적';
-              return (
-                <MaterialCommunityIcons
-                  name={iconName}
-                  size={iconSize}
-                  color={iconColor}
-                />
-              );
-            } else if (route.name === 'graduate') {
-              iconName = 'graduation-cap'; // FontAwesome5
-              tabName = '졸업';
-              return (
-                <FontAwesome5
-                  name={iconName}
-                  size={iconSize}
-                  color={iconColor}
-                />
-              );
-            } else if (route.name === 'course') {
-              iconName = 'book'; // MaterialCommunityIcons
-              tabName = '수강신청';
-              return (
-                <MaterialCommunityIcons
-                  name={iconName}
-                  size={iconSize}
-                  color={iconColor}
-                />
-              );
-            }
-          };
+          if (route.name === 'grade') {
+            iconName = 'alphabetical-variant'; // MaterialCommunityIcons
+            tabName = '성적';
+          } else if (route.name === 'graduate') {
+            iconName = 'school'; // FontAwesome5
+            tabName = '졸업';
+          } else if (route.name === 'course') {
+            iconName = 'book'; // MaterialCommunityIcons
+            tabName = '수강신청';
+          }
 
           return (
-            <>
-              <Icon />
-              <Text>{tabName}</Text>
-            </>
+            <IconContainer>
+              <MaterialCommunityIcons
+                name={iconName}
+                size={iconSize}
+                color={iconColor}
+              />
+              <IconText>{tabName}</IconText>
+            </IconContainer>
           );
         },
       })}
       tabBarOptions={{
+        style: {
+          height: 70,
+        },
         showLabel: false,
       }}>
       <Tab.Screen name="grade" component={GradeContainer} />
