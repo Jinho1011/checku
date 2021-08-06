@@ -1,77 +1,107 @@
 import React, {useState, useEffect} from 'react';
-import * as Keychain from 'react-native-keychain';
 
-import {gradeAll} from '../../api';
+import {user, gradeAll, gradeNow} from '../../api';
 import {getData, storeData} from '../../storage';
 import GradePresenter from './GradePresenter';
 
-function IsJsonString(str) {
+const isJson = str => {
   try {
     var json = JSON.parse(str);
     return typeof json === 'object';
   } catch (e) {
     return false;
   }
-}
+};
 
 export default () => {
-  const [grades, setGrades] = useState({});
+  const [stdNo, setStdNo] = useState('');
+  const [shtms, setShtms] = useState([]);
+  const [loadShtms, setLoadShtms] = useState(false);
+  const [courses, setCourses] = useState({});
+  const [loadCourses, setLoadCourses] = useState(false);
+  const [avgs, setAvgs] = useState([]);
+  const [loadAvgs, setLoadAvgs] = useState(false);
 
-  const initGrades = GRADES => {
-    const gradeObj = {};
+  const initCourses = () => {
+    let COURSES = {};
 
-    GRADES.map(GRADE => {
-      if (GRADE.HAKSU_ID != null) {
-        let prev = gradeObj[GRADE.YY]?.[GRADE.SHTM]?.COURSES;
-        let gradeArr = [];
+    shtms.map(async shtm => {
+      let nowShtmCourses = await gradeNow(shtm.REG_YY, shtm.REG_SHTM, stdNo);
 
-        if (prev != null) {
-          gradeArr = [...prev, GRADE];
-        }
+      if (isJson(nowShtmCourses)) {
+        nowShtmCourses = JSON.parse(nowShtmCourses);
+        nowShtmCourses = nowShtmCourses['DS_GRADEOFSTUDENT'];
+      } else console.error('nowShtmCourses is not JSON');
 
-        gradeObj[GRADE.YY] = {
-          ...gradeObj[GRADE.YY],
-          [GRADE.SHTM]: {
-            COURSES: gradeArr,
-          },
-        };
-      } else if (GRADE.SHTM != null) {
-        gradeObj[GRADE.YY] = {
-          ...gradeObj[GRADE.YY],
-          [GRADE.SHTM]: {
-            ...gradeObj[GRADE.YY][GRADE.SHTM],
-            AVG: GRADE,
-          },
-        };
-      } else {
-        gradeObj['AVG'] = GRADE;
+      COURSES[shtm.REG_YY] = {
+        ...COURSES[shtm.REG_YY],
+        [shtm.REG_SHTM]: nowShtmCourses,
+      };
+    });
+
+    setCourses(COURSES);
+
+    setLoadCourses(true);
+  };
+
+  const initAvgs = async () => {
+    let totalGrades = await gradeAll(stdNo);
+
+    if (isJson(totalGrades)) totalGrades = JSON.parse(totalGrades);
+    else console.error('totalGrades is not JSON');
+
+    totalGrades.map(grade => {
+      if (grade.HAKSU_ID == null) {
+        setAvgs(avgs => [...avgs, grade]);
       }
     });
 
-    setGrades(gradeObj);
-    storeData('@grades', gradeObj);
+    setLoadAvgs(true);
   };
 
   useEffect(() => {
     const init = async () => {
-      try {
-        let stdNo = await getData('@stdNo');
-        let storedGrades = await getData('@grades');
-        if (storedGrades != null) setGrades(storedGrades);
-
-        let GRADES = await gradeAll(stdNo);
-        try {
-          GRADES = JSON.parse(GRADES);
-        } catch (e) {
-          console.error(e);
-        }
-        initGrades(GRADES);
-      } catch (error) {
-        throw error;
-      }
+      let stdNo = await getData('@stdNo');
+      setStdNo(stdNo);
     };
     init();
   }, []);
 
-  return <GradePresenter grades={grades}></GradePresenter>;
+  useEffect(() => {
+    const init = async () => {
+      let USER = await user(stdNo);
+      USER = JSON.parse(USER);
+      let REGIST_SHTMS = USER['DS_TUIT100'];
+
+      REGIST_SHTMS.map(SHTM => {
+        setShtms(shtms => [
+          ...shtms,
+          {REG_YY: SHTM.REG_YY, REG_SHTM: SHTM.REG_SHTM},
+        ]);
+      });
+
+      setLoadShtms(true);
+    };
+    if (stdNo != '' && !loadShtms) init();
+  }, [stdNo]);
+
+  useEffect(() => {
+    const init = async () => {
+      initCourses();
+      initAvgs();
+    };
+    if (loadShtms && !loadCourses && !loadAvgs) init();
+  }, [loadShtms]);
+
+  useEffect(() => {
+    if (loadCourses && loadAvgs) {
+    }
+  }, [loadCourses, loadAvgs]);
+
+  return (
+    <GradePresenter
+      shtms={shtms}
+      courses={courses}
+      avgs={avgs}></GradePresenter>
+  );
 };
