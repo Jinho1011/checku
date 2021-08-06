@@ -53,7 +53,7 @@ export default ({grades, setSelected}) => {
   useEffect(() => {
     if (open) {
       const itemCnt = items.length;
-      setMargin(itemCnt * 36 + 6);
+      setMargin(itemCnt * 28);
     } else {
       setMargin(0);
     }
