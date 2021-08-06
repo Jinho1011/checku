@@ -45,7 +45,7 @@ export default function App() {
       })}
       tabBarOptions={{
         style: {
-          height: 70,
+          height: 80,
         },
         showLabel: false,
       }}>
