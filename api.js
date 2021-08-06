@@ -25,6 +25,20 @@ export const onload = () => {
     });
 };
 
+export const user = stdNo => {
+  return fetch('https://checku.site/user', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({strStdNo: stdNo}),
+  })
+    .then(response => {
+      return response.text();
+    })
+    .catch(error => {
+      throw error;
+    });
+};
+
 export const gradeAll = stdNo => {
   return fetch('https://checku.site/grade/all', {
     method: 'POST',
