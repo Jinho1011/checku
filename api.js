@@ -52,3 +52,17 @@ export const gradeAll = stdNo => {
       throw error;
     });
 };
+
+export const gradeNow = (basiYy, basiShtm, stdNo) => {
+  return fetch('https://checku.site/grade/now', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({stdNo, basiYy, basiShtm}),
+  })
+    .then(response => {
+      return response.text();
+    })
+    .catch(error => {
+      throw error;
+    });
+};
