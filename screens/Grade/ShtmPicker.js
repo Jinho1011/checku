@@ -3,29 +3,45 @@ import {StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Entypo';
 
-export default ({grades, setSelected}) => {
+import {getData} from '../../storage';
+
+const getLabel = shtm => {
+  let shtmName;
+
+  switch (shtm.REG_SHTM) {
+    case 'B01011':
+      shtmName = '1학기';
+      break;
+    case 'B01012':
+      shtmName = '2학기';
+      break;
+  }
+
+  return shtm.REG_YY + '년 ' + shtmName;
+};
+
+export default ({shtms, loadShtms, setSelected}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [placeholder, setPlaceholder] = useState('2021년 1학기');
-  const [margin, setMargin] = useState(0);
   const [items, setItems] = useState([]);
+  const [loadItems, setLoadItems] = useState(false);
+  const [placeholder, setPlaceholder] = useState('');
 
   const styles = StyleSheet.create({
     style: {
       borderWidth: 0,
       backgroundColor: '#00CA64',
+    },
+    containerStyle: {
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
-        height: 2,
+        height: 4,
       },
-      shadowOpacity: 0.23,
-      shadowRadius: 2.62,
+      shadowOpacity: 0.14,
+      shadowRadius: 4.0,
 
       elevation: 4,
-    },
-    containerStyle: {
-      marginBottom: margin,
     },
     dropDownContainerStyle: {
       borderWidth: 0,
@@ -39,8 +55,39 @@ export default ({grades, setSelected}) => {
     listItemLabelStyle: {
       color: '#000',
       fontFamily: 'NotoSansKR-Medium',
+      paddingBottom: 10,
+      paddingTop: 10,
     },
   });
+
+  useEffect(() => {
+    const init = async () => {
+      let latest = await getData('@LATEST');
+      setPlaceholder(getLabel(latest));
+    };
+    init();
+  }, []);
+
+  useEffect(() => {
+    const init = async () => {
+      shtms.map(shtm => {
+        let label = getLabel(shtm);
+
+        setItems(items => [
+          ...items,
+          {
+            label: label,
+            value: label,
+            data: shtm,
+          },
+        ]);
+      });
+
+      setLoadItems(true);
+    };
+
+    if (shtms.length && !loadItems) init();
+  }, [loadShtms]);
 
   useEffect(() => {
     if (value != null) {
@@ -49,42 +96,6 @@ export default ({grades, setSelected}) => {
       });
     }
   }, [value]);
-
-  useEffect(() => {
-    if (open) {
-      const itemCnt = items.length;
-      setMargin(itemCnt * 28);
-    } else {
-      setMargin(0);
-    }
-  }, [open]);
-
-  useEffect(() => {
-    if (Object.keys(grades).length != 0 && items.length == 0) {
-      for (const year in grades) {
-        if (year != 'AVG') {
-          for (const shtm in grades[year]) {
-            let SHTM_KR;
-            if (shtm == 'B01011') SHTM_KR = '1학기';
-            else if (shtm == 'B01012') SHTM_KR = '2학기';
-            const label = year + '년 ' + SHTM_KR;
-
-            setItems(prev => [
-              {
-                label: label,
-                value: label,
-                data: {
-                  year: year,
-                  shtm: shtm,
-                },
-              },
-              ...prev,
-            ]);
-          }
-        }
-      }
-    }
-  });
 
   return (
     <DropDownPicker
