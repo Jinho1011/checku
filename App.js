@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
 import * as Keychain from 'react-native-keychain';
-import {login} from './api';
 import {NavigationContainer} from '@react-navigation/native';
+
+import {login} from './api';
 import Stack from './navigation/Stack';
 
 const App = () => {
@@ -17,8 +18,8 @@ const App = () => {
     } else {
       setInitRoute('login');
     }
+
     // await Keychain.resetGenericPassword();
-    setInitRoute('tab');
   }, []);
 
   return (
