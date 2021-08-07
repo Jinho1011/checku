@@ -61,8 +61,15 @@ export default () => {
 
   useEffect(() => {
     const init = async () => {
-      let stdNo = await getData('@stdNo');
+      let stdNo = await getData('@STDNO');
+      let shtms = await getData('@SHTMS');
+      let courses = await getData('@COURSES');
+      let avgs = await getData('@AVGS');
+
       setStdNo(stdNo);
+      setShtms(shtms);
+      setCourses(courses);
+      setAvgs(avgs);
     };
     init();
   }, []);
@@ -87,6 +94,8 @@ export default () => {
 
   useEffect(() => {
     const init = async () => {
+      storeData('@SHTMS', shtms);
+
       initCourses();
       initAvgs();
     };
@@ -95,6 +104,8 @@ export default () => {
 
   useEffect(() => {
     if (loadCourses && loadAvgs) {
+      storeData('@COURSES', courses);
+      storeData('@AVGS', avgs);
     }
   }, [loadCourses, loadAvgs]);
 
