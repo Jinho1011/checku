@@ -13,6 +13,21 @@ const isJson = str => {
   }
 };
 
+const getLabel = shtm => {
+  let shtmName;
+
+  switch (shtm.REG_SHTM) {
+    case 'B01011':
+      shtmName = '1학기';
+      break;
+    case 'B01012':
+      shtmName = '2학기';
+      break;
+  }
+
+  return shtm.REG_YY + '년 ' + shtmName;
+};
+
 export default () => {
   const [stdNo, setStdNo] = useState('');
   const [shtms, setShtms] = useState([]);
@@ -50,6 +65,8 @@ export default () => {
     if (isJson(totalGrades)) totalGrades = JSON.parse(totalGrades);
     else console.error('totalGrades is not JSON');
 
+    if (avgs.length) setAvgs([]);
+
     totalGrades.map(grade => {
       if (grade.HAKSU_ID == null) {
         setAvgs(avgs => [...avgs, grade]);
@@ -62,14 +79,10 @@ export default () => {
   useEffect(() => {
     const init = async () => {
       let stdNo = await getData('@STDNO');
-      let shtms = await getData('@SHTMS');
       let courses = await getData('@COURSES');
-      let avgs = await getData('@AVGS');
 
       setStdNo(stdNo);
-      setShtms(shtms);
       setCourses(courses);
-      setAvgs(avgs);
     };
     init();
   }, []);
@@ -94,7 +107,7 @@ export default () => {
 
   useEffect(() => {
     const init = async () => {
-      storeData('@SHTMS', shtms);
+      storeData('@LATEST', shtms[0]);
 
       initCourses();
       initAvgs();
@@ -105,13 +118,13 @@ export default () => {
   useEffect(() => {
     if (loadCourses && loadAvgs) {
       storeData('@COURSES', courses);
-      storeData('@AVGS', avgs);
     }
   }, [loadCourses, loadAvgs]);
 
   return (
     <GradePresenter
       shtms={shtms}
+      loadShtms={loadShtms}
       courses={courses}
       avgs={avgs}></GradePresenter>
   );
