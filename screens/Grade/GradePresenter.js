@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
+import {getData} from '../../storage';
 
 import {Container, Divider} from '../components';
 import ShtmPicker from './ShtmPicker';
@@ -117,20 +118,20 @@ const AvgNumber = styled.Text`
   color: #000000;
 `;
 
-export default ({grades}) => {
-  const [selected, setSelected] = useState({
-    year: '2021',
-    shtm: 'B01011',
-  });
-  const [courses, setCourses] = useState([]);
-  const [avg, setAvg] = useState({});
+export default ({shtms, loadShtms, courses, avgs}) => {
+  const [selected, setSelected] = useState({});
 
   useEffect(() => {
-    if (Object.keys(grades).length != 0) {
-      setCourses(grades[selected.year][selected.shtm].COURSES);
-      setAvg(grades[selected.year][selected.shtm].AVG);
-    }
-  });
+    const init = async () => {
+      let latest = await getData('@LATEST');
+      setSelected(latest);
+    };
+    init();
+  }, []);
+
+  useEffect(() => {
+    if (loadShtms) setSelected(shtms[0]);
+  }, [loadShtms]);
 
   return (
     <Container nestedScrollEnabled={true}>
@@ -140,33 +141,36 @@ export default ({grades}) => {
           <SettingText>설정</SettingText>
         </SettingBtn>
       </TitleContainer>
-      <ShtmPicker grades={grades} setSelected={setSelected}></ShtmPicker>
+      <ShtmPicker
+        shtms={shtms}
+        loadShtms={loadShtms}
+        setSelected={setSelected}></ShtmPicker>
       <CourseContainer>
         <CoursesTitleContainer>
           <GradesTitle>과목명</GradesTitle>
           <GradesTitle2>등급</GradesTitle2>
         </CoursesTitleContainer>
         <Courses>
-          {courses.map(course => {
+          {courses?.[selected.REG_YY]?.[selected.REG_SHTM].map(course => {
             return (
               <Course key={course.HAKSU_ID}>
-                <CourseTitle>{course.HAKSU_NM}</CourseTitle>
+                <CourseTitle>{course.TYPL_KOR_NM}</CourseTitle>
                 <CourseGradeContainer>
-                  <CourseGrade>{course.GRD}</CourseGrade>
+                  <CourseGrade>{course.CALCU_GRD}</CourseGrade>
                 </CourseGradeContainer>
               </Course>
             );
           })}
         </Courses>
         <AvgContainer>
-          <Avg>
+          {/* <Avg>
             <AvgTitle>신청학점</AvgTitle>
             <AvgNumber>{avg.DETM_CD}</AvgNumber>
           </Avg>
           <Avg>
             <AvgTitle>평점평균</AvgTitle>
             <AvgNumber>{avg.POBT_DIV}</AvgNumber>
-          </Avg>
+          </Avg> */}
         </AvgContainer>
       </CourseContainer>
       <Divider></Divider>
