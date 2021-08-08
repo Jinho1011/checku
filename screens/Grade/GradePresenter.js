@@ -141,10 +141,10 @@ export default ({shtms, loadShtms, courses, avgs}) => {
           <SettingText>설정</SettingText>
         </SettingBtn>
       </TitleContainer>
-      <ShtmPicker
+      {/* <ShtmPicker
         shtms={shtms}
         loadShtms={loadShtms}
-        setSelected={setSelected}></ShtmPicker>
+        setSelected={setSelected}></ShtmPicker> */}
       <CourseContainer>
         <CoursesTitleContainer>
           <GradesTitle>과목명</GradesTitle>
