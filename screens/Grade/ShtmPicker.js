@@ -15,6 +15,12 @@ const getLabel = shtm => {
     case 'B01012':
       shtmName = '2학기';
       break;
+    case 'B01014':
+      shtmName = '하계 계절학기';
+      break;
+    case 'B01015':
+      shtmName = '동계 계절학기';
+      break;
   }
 
   return shtm.REG_YY + '년 ' + shtmName;
@@ -24,6 +30,7 @@ export default ({shtms, loadShtms, setSelected}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
+  const [margin, setMargin] = useState(0);
   const [loadItems, setLoadItems] = useState(false);
   const [placeholder, setPlaceholder] = useState('');
 
@@ -31,8 +38,6 @@ export default ({shtms, loadShtms, setSelected}) => {
     style: {
       borderWidth: 0,
       backgroundColor: '#00CA64',
-    },
-    containerStyle: {
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -42,6 +47,9 @@ export default ({shtms, loadShtms, setSelected}) => {
       shadowRadius: 4.0,
 
       elevation: 4,
+    },
+    containerStyle: {
+      marginBottom: margin,
     },
     dropDownContainerStyle: {
       borderWidth: 0,
@@ -96,6 +104,16 @@ export default ({shtms, loadShtms, setSelected}) => {
       });
     }
   }, [value]);
+
+  useEffect(() => {
+    console.log(open);
+    if (open) {
+      let itemCnt = items.length;
+      setMargin(itemCnt * 36 + 20);
+    } else {
+      setMargin(0);
+    }
+  }, [open]);
 
   return (
     <DropDownPicker
