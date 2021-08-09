@@ -3,8 +3,9 @@ import {Text, View, StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 import {getData} from '../../storage';
 
-import {Container, Divider} from '../components';
+import {ScrollContainer, Container, Divider} from '../components';
 import ShtmPicker from './ShtmPicker';
+import ModalSelector from './ModalSelector';
 
 const TitleContainer = styled.View`
   flex-direction: row;
@@ -118,8 +119,9 @@ const AvgNumber = styled.Text`
   color: #000000;
 `;
 
-export default ({shtms, loadShtms, courses, avgs}) => {
+const GradePresenter = ({shtms, loadShtms, courses, avgs}) => {
   const [selected, setSelected] = useState({});
+  const [selectedCourse, setSelectedCourse] = useState({});
 
   useEffect(() => {
     const init = async () => {
@@ -133,37 +135,45 @@ export default ({shtms, loadShtms, courses, avgs}) => {
     if (loadShtms) setSelected(shtms[0]);
   }, [loadShtms]);
 
+  useEffect(() => {}, [selected]);
+
   return (
-    <Container nestedScrollEnabled={true}>
-      <TitleContainer>
-        <Title>성적</Title>
-        <SettingBtn>
-          <SettingText>설정</SettingText>
-        </SettingBtn>
-      </TitleContainer>
-      {/* <ShtmPicker
+    <ScrollContainer>
+      <Container>
+        <TitleContainer>
+          <Title>성적</Title>
+          <SettingBtn>
+            <SettingText>설정</SettingText>
+          </SettingBtn>
+        </TitleContainer>
+        <ModalSelector
+          shtms={shtms}
+          loadShtms={loadShtms}
+          setSelected={setSelected}></ModalSelector>
+
+        {/* <ShtmPicker
         shtms={shtms}
         loadShtms={loadShtms}
         setSelected={setSelected}></ShtmPicker> */}
-      <CourseContainer>
-        <CoursesTitleContainer>
-          <GradesTitle>과목명</GradesTitle>
-          <GradesTitle2>등급</GradesTitle2>
-        </CoursesTitleContainer>
-        <Courses>
-          {courses?.[selected.REG_YY]?.[selected.REG_SHTM].map(course => {
-            return (
-              <Course key={course.HAKSU_ID}>
-                <CourseTitle>{course.TYPL_KOR_NM}</CourseTitle>
-                <CourseGradeContainer>
-                  <CourseGrade>{course.CALCU_GRD}</CourseGrade>
-                </CourseGradeContainer>
-              </Course>
-            );
-          })}
-        </Courses>
-        <AvgContainer>
-          {/* <Avg>
+        <CourseContainer>
+          <CoursesTitleContainer>
+            <GradesTitle>과목명</GradesTitle>
+            <GradesTitle2>등급</GradesTitle2>
+          </CoursesTitleContainer>
+          <Courses>
+            {courses?.[selected.REG_YY]?.[selected.REG_SHTM].map(course => {
+              return (
+                <Course key={course.HAKSU_ID}>
+                  <CourseTitle>{course.TYPL_KOR_NM}</CourseTitle>
+                  <CourseGradeContainer>
+                    <CourseGrade>{course.CALCU_GRD}</CourseGrade>
+                  </CourseGradeContainer>
+                </Course>
+              );
+            })}
+          </Courses>
+          <AvgContainer>
+            {/* <Avg>
             <AvgTitle>신청학점</AvgTitle>
             <AvgNumber>{avg.DETM_CD}</AvgNumber>
           </Avg>
@@ -171,9 +181,12 @@ export default ({shtms, loadShtms, courses, avgs}) => {
             <AvgTitle>평점평균</AvgTitle>
             <AvgNumber>{avg.POBT_DIV}</AvgNumber>
           </Avg> */}
-        </AvgContainer>
-      </CourseContainer>
-      <Divider></Divider>
-    </Container>
+          </AvgContainer>
+        </CourseContainer>
+        <Divider></Divider>
+      </Container>
+    </ScrollContainer>
   );
 };
+
+export default React.memo(GradePresenter);
