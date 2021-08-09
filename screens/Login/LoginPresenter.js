@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform} from 'react-native';
 import styled from 'styled-components/native';
 
-import {Container} from '../components';
+import {Container, ScrollContainer} from '../components';
 
 const Title = styled.Text`
   font-family: 'NotoSansKR-Bold';
@@ -62,35 +62,37 @@ const LoginButtonText = styled.Text`
 
 export default ({setId, setPwd, onSubmit}) => {
   return (
-    <Container>
-      <Title>로그인</Title>
-      <SubTitle>포탈 아이디와 비밀번호를 입력해주세요.</SubTitle>
-      <InputContainer>
-        <InputTitle>아이디</InputTitle>
-        <InputText secureTextEntry={false} onChangeText={setId} />
-        <InputTitle>비밀번호</InputTitle>
-        <InputText secureTextEntry={true} onChangeText={setPwd} />
-        <LoginButton
-          onPress={onSubmit}
-          style={{
-            ...Platform.select({
-              ios: {
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 10,
+    <ScrollContainer>
+      <Container>
+        <Title>로그인</Title>
+        <SubTitle>포탈 아이디와 비밀번호를 입력해주세요.</SubTitle>
+        <InputContainer>
+          <InputTitle>아이디</InputTitle>
+          <InputText secureTextEntry={false} onChangeText={setId} />
+          <InputTitle>비밀번호</InputTitle>
+          <InputText secureTextEntry={true} onChangeText={setPwd} />
+          <LoginButton
+            onPress={onSubmit}
+            style={{
+              ...Platform.select({
+                ios: {
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: 0,
+                    height: 10,
+                  },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 10,
                 },
-                shadowOpacity: 0.1,
-                shadowRadius: 10,
-              },
-              android: {
-                elevation: 8,
-              },
-            }),
-          }}>
-          <LoginButtonText>로그인</LoginButtonText>
-        </LoginButton>
-      </InputContainer>
-    </Container>
+                android: {
+                  elevation: 8,
+                },
+              }),
+            }}>
+            <LoginButtonText>로그인</LoginButtonText>
+          </LoginButton>
+        </InputContainer>
+      </Container>
+    </ScrollContainer>
   );
 };
