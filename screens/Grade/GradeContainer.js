@@ -13,21 +13,6 @@ const isJson = str => {
   }
 };
 
-const getLabel = shtm => {
-  let shtmName;
-
-  switch (shtm.REG_SHTM) {
-    case 'B01011':
-      shtmName = '1학기';
-      break;
-    case 'B01012':
-      shtmName = '2학기';
-      break;
-  }
-
-  return shtm.REG_YY + '년 ' + shtmName;
-};
-
 export default () => {
   const [stdNo, setStdNo] = useState('');
   const [shtms, setShtms] = useState([]);
@@ -37,10 +22,11 @@ export default () => {
   const [avgs, setAvgs] = useState([]);
   const [loadAvgs, setLoadAvgs] = useState(false);
 
-  const initCourses = () => {
+  const initCourses = async () => {
     let COURSES = {};
 
-    shtms.map(async shtm => {
+    for (var i = 0; i < shtms.length; i++) {
+      let shtm = shtms[i];
       let nowShtmCourses = await gradeNow(shtm.REG_YY, shtm.REG_SHTM, stdNo);
 
       if (isJson(nowShtmCourses)) {
@@ -52,9 +38,9 @@ export default () => {
         ...COURSES[shtm.REG_YY],
         [shtm.REG_SHTM]: nowShtmCourses,
       };
-    });
+    }
 
-    setCourses(COURSES);
+    if (COURSES != courses) setCourses(COURSES);
 
     setLoadCourses(true);
   };
@@ -64,8 +50,6 @@ export default () => {
 
     if (isJson(totalGrades)) totalGrades = JSON.parse(totalGrades);
     else console.error('totalGrades is not JSON');
-
-    if (avgs.length) setAvgs([]);
 
     totalGrades.map(grade => {
       if (grade.HAKSU_ID == null) {
