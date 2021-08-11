@@ -149,12 +149,8 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs}) => {
         <ModalSelector
           shtms={shtms}
           loadShtms={loadShtms}
+          selected={selected}
           setSelected={setSelected}></ModalSelector>
-
-        {/* <ShtmPicker
-        shtms={shtms}
-        loadShtms={loadShtms}
-        setSelected={setSelected}></ShtmPicker> */}
         <CourseContainer>
           <CoursesTitleContainer>
             <GradesTitle>과목명</GradesTitle>
