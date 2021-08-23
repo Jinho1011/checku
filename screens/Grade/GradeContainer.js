@@ -110,6 +110,7 @@ export default () => {
       shtms={shtms}
       loadShtms={loadShtms}
       courses={courses}
-      avgs={avgs}></GradePresenter>
+      avgs={avgs}
+      loadAvgs={loadAvgs}></GradePresenter>
   );
 };

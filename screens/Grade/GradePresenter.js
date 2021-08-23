@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import {getData} from '../../storage';
 
 import {ScrollContainer, Container, Divider} from '../components';
-import ShtmPicker from './ShtmPicker';
 import ModalSelector from './ModalSelector';
 
 const TitleContainer = styled.View`
@@ -119,9 +118,14 @@ const AvgNumber = styled.Text`
   color: #000000;
 `;
 
-const GradePresenter = ({shtms, loadShtms, courses, avgs}) => {
+const Padding = styled.View`
+  padding-bottom: 100px;
+`;
+
+const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
   const [selected, setSelected] = useState({});
-  const [selectedCourse, setSelectedCourse] = useState({});
+  const [selectedCourse, setSelectedCourse] = useState([]);
+  const [selectedAvg, setSelectedAvg] = useState({});
 
   useEffect(() => {
     const init = async () => {
@@ -135,7 +139,17 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs}) => {
     if (loadShtms) setSelected(shtms[0]);
   }, [loadShtms]);
 
-  useEffect(() => {}, [selected]);
+  useEffect(() => {
+    setSelectedCourse(courses?.[selected.REG_YY]?.[selected.REG_SHTM]);
+  }, [selected]);
+
+  useEffect(() => {
+    avgs.map(avg => {
+      if (avg.SHTM == selected.REG_SHTM && avg.YY == selected.REG_YY) {
+        setSelectedAvg(avg);
+      }
+    });
+  }, [loadAvgs]);
 
   return (
     <ScrollContainer>
@@ -157,7 +171,7 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs}) => {
             <GradesTitle2>등급</GradesTitle2>
           </CoursesTitleContainer>
           <Courses>
-            {courses?.[selected.REG_YY]?.[selected.REG_SHTM].map(course => {
+            {selectedCourse?.map(course => {
               return (
                 <Course key={course.HAKSU_ID}>
                   <CourseTitle>{course.TYPL_KOR_NM}</CourseTitle>
@@ -169,17 +183,18 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs}) => {
             })}
           </Courses>
           <AvgContainer>
-            {/* <Avg>
-            <AvgTitle>신청학점</AvgTitle>
-            <AvgNumber>{avg.DETM_CD}</AvgNumber>
-          </Avg>
-          <Avg>
-            <AvgTitle>평점평균</AvgTitle>
-            <AvgNumber>{avg.POBT_DIV}</AvgNumber>
-          </Avg> */}
+            <Avg>
+              <AvgTitle>신청학점</AvgTitle>
+              <AvgNumber>{selectedAvg.DETM_CD}</AvgNumber>
+            </Avg>
+            <Avg>
+              <AvgTitle>평점평균</AvgTitle>
+              <AvgNumber>{selectedAvg.POBT_DIV}</AvgNumber>
+            </Avg>
           </AvgContainer>
         </CourseContainer>
         <Divider></Divider>
+        <Padding></Padding>
       </Container>
     </ScrollContainer>
   );
