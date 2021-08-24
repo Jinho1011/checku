@@ -5,6 +5,7 @@ import {getData} from '../../storage';
 
 import {ScrollContainer, Container, Divider} from '../components';
 import ModalSelector from './ModalSelector';
+import GradeModal from './GradeModal';
 
 const TitleContainer = styled.View`
   flex-direction: row;
@@ -124,8 +125,12 @@ const Padding = styled.View`
 
 const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
   const [selected, setSelected] = useState({});
-  const [selectedCourse, setSelectedCourse] = useState([]);
-  const [selectedAvg, setSelectedAvg] = useState({});
+  const [currentCourse, setCurrentCourse] = useState([]);
+  const [currentAvg, setCurrentAvg] = useState({});
+  const [selectedCourse, setSelectedCourse] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  const clickCourse = () => {};
 
   useEffect(() => {
     const init = async () => {
@@ -140,13 +145,13 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
   }, [loadShtms]);
 
   useEffect(() => {
-    setSelectedCourse(courses?.[selected.REG_YY]?.[selected.REG_SHTM]);
+    setCurrentCourse(courses?.[selected.REG_YY]?.[selected.REG_SHTM]);
   }, [selected]);
 
   useEffect(() => {
     avgs.map(avg => {
       if (avg.SHTM == selected.REG_SHTM && avg.YY == selected.REG_YY) {
-        setSelectedAvg(avg);
+        setCurrentAvg(avg);
       }
     });
   }, [loadAvgs]);
@@ -171,9 +176,14 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
             <GradesTitle2>등급</GradesTitle2>
           </CoursesTitleContainer>
           <Courses>
-            {selectedCourse?.map(course => {
+            {currentCourse?.map(course => {
               return (
-                <Course key={course.HAKSU_ID}>
+                <Course
+                  key={course.HAKSU_ID}
+                  onPress={() => {
+                    setSelectedCourse(course);
+                    setShowModal(true);
+                  }}>
                   <CourseTitle>{course.TYPL_KOR_NM}</CourseTitle>
                   <CourseGradeContainer>
                     <CourseGrade>{course.CALCU_GRD}</CourseGrade>
@@ -182,14 +192,19 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
               );
             })}
           </Courses>
+          <GradeModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            selectedCourse={selectedCourse}
+          />
           <AvgContainer>
             <Avg>
               <AvgTitle>신청학점</AvgTitle>
-              <AvgNumber>{selectedAvg.DETM_CD}</AvgNumber>
+              <AvgNumber>{currentAvg.DETM_CD}</AvgNumber>
             </Avg>
             <Avg>
               <AvgTitle>평점평균</AvgTitle>
-              <AvgNumber>{selectedAvg.POBT_DIV}</AvgNumber>
+              <AvgNumber>{currentAvg.POBT_DIV}</AvgNumber>
             </Avg>
           </AvgContainer>
         </CourseContainer>
