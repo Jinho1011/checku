@@ -1,21 +1,10 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  Platform,
-  Animated,
-  Dimensions,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Platform} from 'react-native';
 import styled from 'styled-components/native';
 import Modal from 'react-native-modal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {getData} from '../../storage';
-
-let WIDTH = Dimensions.get('window').width;
-let HEIGHT = Dimensions.get('window').height;
 
 const SelectorContainer = styled.View`
   overflow: visible;
@@ -67,47 +56,10 @@ const ModalItem = styled.Pressable``;
 
 const ModalClose = styled.Pressable``;
 
-const styles = StyleSheet.create({
-  shadowBox: {
-    ...Platform.select({
-      ios: {
-        shadowColor: 'rgb(50, 50, 50)',
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        shadowOffset: {
-          height: 3,
-          width: 0,
-        },
-      },
-      android: {
-        elevation: 10,
-      },
-    }),
-  },
-  Background: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  fadingContainer: {
-    flex: 1,
-    height: HEIGHT,
-    marginTop: -104,
-    position: 'absolute',
-    zIndex: 10,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#000',
-  },
-});
-
 export default ({shtms, loadShtms, selected, setSelected}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [items, setItem] = useState([]);
   const [placeholder, setPlaceholder] = useState('');
-
-  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const getLabel = shtm => {
     let shtmName;
@@ -129,32 +81,6 @@ export default ({shtms, loadShtms, selected, setSelected}) => {
 
     return shtm.REG_YY + '년 ' + shtmName;
   };
-
-  const fadeIn = () => {
-    Animated.spring(fadeAnim, {
-      toValue: 0.6,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  useEffect(() => {
-    if (modalVisible) {
-      fadeIn();
-    } else {
-      fadeOut();
-    }
-  }, [modalVisible]);
-
-  useEffect(() => {}, [items]);
 
   useEffect(() => {
     const init = async () => {
@@ -191,27 +117,14 @@ export default ({shtms, loadShtms, selected, setSelected}) => {
   return (
     <>
       <SelectorContainer>
-        <ShowModalPress
-          onPress={() => setModalVisible(true)}
-          style={styles.shadowBox}>
+        <ShowModalPress onPress={() => setModalVisible(true)}>
           <ShowModalText>{placeholder}</ShowModalText>
         </ShowModalPress>
       </SelectorContainer>
-      {modalVisible ? (
-        <Animated.View
-          style={[
-            styles.fadingContainer,
-            {
-              opacity: fadeAnim,
-            },
-          ]}
-        />
-      ) : null}
       <Modal
-        style={[styles.shadowBox, styles.Background]}
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
+        style={{justifyContent: 'flex-end', margin: 0}}
+        onBackdropPress={() => setModalVisible(false)}
+        isVisible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
