@@ -66,3 +66,16 @@ export const gradeNow = (basiYy, basiShtm, stdNo) => {
       throw error;
     });
 };
+
+export const getShtm = () => {
+  return fetch('https://checku.site/subject/ltShtm', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+  })
+    .then(response => {
+      return response.text();
+    })
+    .catch(error => {
+      throw error;
+    });
+};
