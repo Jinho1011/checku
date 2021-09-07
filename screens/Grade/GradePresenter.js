@@ -130,8 +130,6 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
   const [selectedCourse, setSelectedCourse] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  const clickCourse = () => {};
-
   useEffect(() => {
     const init = async () => {
       let latest = await getData('@LATEST');
@@ -146,6 +144,11 @@ const GradePresenter = ({shtms, loadShtms, courses, avgs, loadAvgs}) => {
 
   useEffect(() => {
     setCurrentCourse(courses?.[selected.REG_YY]?.[selected.REG_SHTM]);
+    avgs.map(avg => {
+      if (avg.SHTM == selected.REG_SHTM && avg.YY == selected.REG_YY) {
+        setCurrentAvg(avg);
+      }
+    });
   }, [selected]);
 
   useEffect(() => {
