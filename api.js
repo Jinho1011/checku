@@ -79,3 +79,16 @@ export const getShtm = () => {
       throw error;
     });
 };
+
+export const getYear = () => {
+  return fetch('https://checku.site/user/load', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+  })
+    .then(response => {
+      return response.text();
+    })
+    .catch(error => {
+      throw error;
+    });
+};
